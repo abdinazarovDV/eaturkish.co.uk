@@ -61,7 +61,7 @@ export default {
             const deleted = await req.fetch(catQuery.delete, category_id)
             
             if(!deleted){
-                throw new Error("There is no such category")
+                throw new Error("There is no such category_id")
             }
  
             return res 
@@ -91,6 +91,10 @@ export default {
             }
 
             const updated = await req.fetch(catQuery.update,category_id,category_name)
+
+            if(!updated){
+                throw new Error("There is no such category_id")
+            }
 
             return res 
                 .status(200) 
