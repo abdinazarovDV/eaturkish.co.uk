@@ -12,7 +12,7 @@ export default (req, res, next) => {
                 client.release()
             }
         },
-        req.fethAll = async (SQL, ...params) => {
+        req.fetchAll = async (SQL, ...params) => {
             const client = await pool.connect()
             try {
                 const { rows } = await client.query(SQL, params.length ? params : null)

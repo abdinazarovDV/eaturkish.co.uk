@@ -4,6 +4,7 @@ import config from '#config/general.config.js'
 
 //import routes
 import authRouter from '#route/auth.js'
+import catRouter from '#route/category.js'
 
 
 //import middlewares
@@ -18,6 +19,7 @@ app.use(db)
 
 //all routes
 app.use('/auth', authRouter)
+app.use('/category',catRouter)
 
 //error handling
 app.use((err, req, res, next) => {
