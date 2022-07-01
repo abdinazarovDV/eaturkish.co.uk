@@ -60,10 +60,25 @@ export default {
         }
         catch(err){
             return next(err)
+        }        
+    },
+    GET:async(req,res,next)=>{
+        try{
+            const {food_id = "",search = "",category_id="",active = "",page=1,limit=10} = req.query
+
+            const selected = await req.fetchAll(foodQuery.get,search,food_id,category_id,active,((page - 1) * limit),limit)
+
+            return res 
+            .status(200) 
+            .json({ 
+                status: 200, 
+                data: selected, 
+                message: "Succes selected" 
+            })
         }
-
-
-        
+        catch(err){
+            return next(err)
+        }
     }
 }
 
