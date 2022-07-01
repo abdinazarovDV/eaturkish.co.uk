@@ -1,10 +1,14 @@
 import express from 'express'
+import fileUpload from 'express-fileupload'
+import path from 'path'
 
 import config from '#config/general.config.js'
 
 //import routes
 import authRouter from '#route/auth.js'
 import catRouter from '#route/category.js'
+import foodRouter from '#route/food.js'
+
 
 
 //import middlewares
@@ -15,11 +19,13 @@ const app = express()
 
 app.use(express.json())
 app.use(db)
-
+app.use(fileUpload())
+app.use("/images",express.static(path.join(process.cwd(),'images')))
 
 //all routes
 app.use('/auth', authRouter)
 app.use('/category',catRouter)
+app.use('/food',foodRouter)
 
 //error handling
 app.use((err, req, res, next) => {
