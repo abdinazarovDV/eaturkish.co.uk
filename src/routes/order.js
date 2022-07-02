@@ -3,7 +3,7 @@ import  orderController from '#controller/order.js'
 
 const router = new Router()
 
-router.post("/", orderController.ADD)
+router.post("/", orderController.addOrder)
 // router.get("/",catController.GET)
 
 

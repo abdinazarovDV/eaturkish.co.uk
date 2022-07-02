@@ -8,7 +8,7 @@ import config from '#config/general.config.js'
 import authRouter from '#route/auth.js'
 import catRouter from '#route/category.js'
 import foodRouter from '#route/food.js'
-import orderRouter from '#route/order.js'
+import orderRouters from '#route/order.js'
 
 
 
