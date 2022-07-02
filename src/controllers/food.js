@@ -79,6 +79,14 @@ export default {
         catch(err){
             return next(err)
         }
+    },
+    UPDATE:(req,res,next)=>{
+        try{
+            const {  } = req.body
+        }
+        catch(err){
+            return next(err)
+        }
     }
 }
 

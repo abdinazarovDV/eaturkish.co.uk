@@ -35,7 +35,8 @@ create table foods (
     food_picture varchar(128),
     food_price numeric not null,
     is_active boolean default true,
-    created_at timestamp default current_timestamp
+    created_at timestamp default current_timestamp,
+    rate int not null default 1
 );
 
 create table temprory_code (
@@ -59,7 +60,7 @@ create table own_menu (
     food_id uuid references foods(food_id) on delete cascade
 );
 
-create table messages (
+create table messages(
     message_id uuid not null default uuid_generate_v4() primary key,
     user_id uuid references users(user_id) on delete cascade,
     message_body text not null

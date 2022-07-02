@@ -26,8 +26,7 @@ export default {
             else true
         end
     order by f.created_at desc
-    offset $5 limit $6
-`}
+    offset $5 limit $6`}
 
 
 // search + 
