@@ -8,6 +8,7 @@ import config from '#config/general.config.js'
 import authRouter from '#route/auth.js'
 import catRouter from '#route/category.js'
 import foodRouter from '#route/food.js'
+import orderRouter from '#route/order.js'
 
 
 
@@ -26,6 +27,7 @@ app.use("/images",express.static(path.join(process.cwd(),'images')))
 app.use('/auth', authRouter)
 app.use('/category',catRouter)
 app.use('/food',foodRouter)
+app.use('/order',orderRouters)
 
 //error handling
 app.use((err, req, res, next) => {
