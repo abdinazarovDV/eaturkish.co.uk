@@ -51,7 +51,8 @@ create table orders (
     orders_id uuid not null default uuid_generate_v4() primary key,
     user_id uuid references users(user_id) on delete cascade,
     food_id uuid references foods(food_id) on delete cascade,
-    count integer not null
+    count integer not null,
+    amount numeric not null
 );
 
 create table own_menu (

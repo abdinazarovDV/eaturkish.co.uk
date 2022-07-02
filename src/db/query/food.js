@@ -26,7 +26,12 @@ export default {
             else true
         end
     order by f.created_at desc
-    offset $5 limit $6`}
+    offset $5 limit $6
+    `,
+    findFood: `
+        select * from foods where food_id::text = $1
+    `
+    }
 
 
 // search + 
