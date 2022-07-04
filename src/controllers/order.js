@@ -1,6 +1,5 @@
 import orderQuery from '#query/order.js'
 import foodQuery from '#query/food.js'
-import { required } from 'joi'
 
 export default {
     addOrder: async (req, res, next) => {

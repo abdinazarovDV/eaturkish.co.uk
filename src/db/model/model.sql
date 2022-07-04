@@ -51,7 +51,8 @@ create table orders (
     user_id uuid references users(user_id) on delete cascade,
     food_id uuid references foods(food_id) on delete cascade,
     count integer not null,
-    amount numeric not null
+    amount numeric not null,
+    admin_view boolean not null default false
 );
 
 create table own_menu (
