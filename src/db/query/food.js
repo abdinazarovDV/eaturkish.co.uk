@@ -30,11 +30,49 @@ export default {
     `,
     findFood: `
         select * from foods where food_id::text = $1
+    `,
+    update:`
+        update foods as f set
+        category_id=(
+            case
+                when length($1)>0 then $1::uuid
+                else f.category_id
+            end
+        ),
+        food_name = (
+            case
+                when length($2)>0 then $2
+                else f.food_name
+            end
+        ),
+        food_description = (
+            case
+                when length($3)>0 then $3
+                else f.food_description
+            end
+        ),
+        food_price = (
+            case
+                when $4>0 then $4
+                else f.food_price
+            end
+        ),
+        is_active = (
+            case
+                when length($5)>0 then $5::boolean
+                else f.is_active
+            end
+        ),
+        rate = (
+            case
+                when $6>0 then $6
+                else f.rate
+            end
+        )
+
+        where f.food_id::text=$7 returning *
+    `,
+    delete:`
+    delete from foods where food_id=$1 returning *
     `
     }
-
-
-// search + 
-// food_id +
-// category_id +
-// is_active

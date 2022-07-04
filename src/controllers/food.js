@@ -79,6 +79,93 @@ export default {
         catch(err){
             return next(err)
         }
+    },
+    UPDATE:async(req,res,next)=>{
+        try{
+            const { food_id,category_id="",food_name="",food_description="",food_price=0,is_active="",rate=0 } = req.body
+            
+            if(!food_id){
+                throw new Error("'food_id' is required! ")
+            }
+
+            if(isNaN(food_price)){
+                throw new Error("'food_price' must be a number!")
+            }
+
+            if(isNaN(rate)){
+                throw new Error("'rate' must be a number!")
+            }
+
+            if(is_active){
+                if(!(is_active=='true' || is_active=='false')){
+                    throw new Error("'is_active' must be 'false' or 'true'")
+                }
+            }
+
+            if(req.files){
+                var { image } = req.files
+
+                let mTypes = ['image/png', 'image/svg+xml', 'image/jpeg']
+
+                if(!image){
+                    throw new Error("Upload image with key 'image'")
+                }
+
+                if(!mTypes.includes(image.mimetype)) {
+                    throw new Error("Please upload an image!")
+                }
+            }
+
+            let updated = await req.fetch(foodQuery.update,category_id
+                ,food_name
+                ,food_description
+                ,food_price
+                ,is_active
+                ,rate,food_id)
+
+            if(image){
+                image.mv(path.join(process.cwd(), "images", updated.food_picture))
+            }
+
+            return res 
+            .status(200) 
+            .json({ 
+                status: 200, 
+                data: [updated], 
+                message: "Succes updated" 
+            })
+
+        }
+        catch(err){
+            return next(err)
+        }
+    },
+    DELETE:async(req,res,next)=>{
+        try{
+            const { food_id } = req.params
+            
+            if(!food_id){
+                throw new Error("'food_id' is required! ")
+            }
+
+            const deleted = await req.fetch(foodQuery.delete,food_id)
+
+            if(!deleted){
+                throw new Error("No food like this 'food_id'")
+            }
+
+            return res 
+            .status(200) 
+            .json({ 
+                status: 200, 
+                data: [deleted], 
+                message: "Succes updated" 
+            })
+
+        }
+        catch(err){
+            return next(err)
+        }
     }
 }
 
