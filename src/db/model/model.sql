@@ -53,7 +53,8 @@ create table orders (
     food_id uuid references foods(food_id) on delete cascade,
     count integer not null,
     amount numeric not null,
-    admin_view boolean not null default false
+    admin_view boolean not null default false,
+    created_at timestamp default current_timestamp
 );
 
 create table own_menu (

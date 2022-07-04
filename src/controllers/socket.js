@@ -1,7 +1,14 @@
 
+export default class SocketIO {
+    static msg
 
+    constructor (message) {
+        SocketIO.msg = message || SocketIO.msg
+    }
 
-export default function socketController (io, msg) {
-    msg.emit('new order', { name: "na" })
+    newOrder (data) {
+        console.log("????");
+        SocketIO.msg.emit('new order', { orders: data })
+    }
 }
 

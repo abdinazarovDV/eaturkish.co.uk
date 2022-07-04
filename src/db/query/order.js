@@ -7,5 +7,11 @@ export default {
             amount
         ) values ( $1, $2, $3, $4 )
         returning *
+    `,
+    editOrderView: `
+        update orders set
+            admin_view = true
+        where orders_id::text = $1
+        returning *
     `
 }
