@@ -12,6 +12,7 @@ import authRouter from '#route/auth.js'
 import catRouter from '#route/category.js'
 import foodRouter from '#route/food.js'
 import orderRouter from '#route/order.js'
+import userRouter from '#route/user.js'
 import socketController from '#controller/socket.js'
 
 
@@ -32,6 +33,7 @@ app.use('/auth', authRouter)
 app.use('/category',catRouter)
 app.use('/food',foodRouter)
 app.use('/order', orderRouter)
+app.use('/user', userRouter)
 
 //error handling
 app.use((err, req, res, next) => {

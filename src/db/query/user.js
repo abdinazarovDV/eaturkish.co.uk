@@ -42,5 +42,11 @@ export default {
                 else true
             end
         returning *
+    `,
+    findUser: `
+        select 
+            *
+        from users
+        where user_id::text = $1
     `
 }

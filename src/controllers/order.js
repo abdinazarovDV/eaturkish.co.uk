@@ -1,5 +1,6 @@
 import orderQuery from '#query/order.js'
 import foodQuery from '#query/food.js'
+import userQuery from '#query/user.js'
 import socketController from '#controller/socket.js'
 
 
@@ -8,6 +9,10 @@ export default {
         try {
             const user_id =  req.user_id ||'9d68cfaf-d056-462e-af01-5cd52ecd6f4c'
             
+            const user = await req.fetch(userQuery.findUser, user_id)
+            if(!user) throw new Error('User not found')
+            delete user.user_password
+
             let { orders } = req.body || []
             
             if(orders.length == 0) throw new Error('No orders')
@@ -24,11 +29,20 @@ export default {
 
                 const orderCreated = await req.fetch(orderQuery.addOrder, user_id, food.food_id, order.count, +order.count * +food.food_price)
                 if(!orderCreated) throw new Error('Order not added')
+
+                orderCreated.food_name = food.food_name
+                orderCreated.food_price = food.food_price
+                orderCreated.food_picture = food.food_picture
+
                 result.push(orderCreated)
             }
 
             const child = new socketController()
-            child.newOrder(result)
+            
+            child.newOrder({
+                user: user,
+                orders: result
+            })
 
             return res.json({
                     status: 200,
