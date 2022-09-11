@@ -1,4 +1,12 @@
-import { pool } from '#config/db.connect.js'
+import pkg from 'pg'
+const { Pool } = pkg
+
+export const pool = new Pool({
+	user: "postgres",
+	password: "1",
+	database: "ea_turkish",
+	host: "localhost"
+})
 
 export default (req, res, next) => {
     try {

@@ -7,7 +7,6 @@ export default class SocketIO {
     }
 
     newOrder (data) {
-        console.log("????");
         SocketIO.msg.emit('new order', { orders: data })
     }
 }

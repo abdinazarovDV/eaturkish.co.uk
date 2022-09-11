@@ -53,7 +53,8 @@ const io = new Server(server, {
 })
 
 io.on('connection', (message) => {
-    new socketController(message)
+    console.log(message)
+    // new socketController(message)
 })
 
 
