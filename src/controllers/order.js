@@ -75,5 +75,17 @@ export default {
         } catch (err) {
             return next(err)
         }
+    },
+    getOrderToAdmin: async (req, res, next) => {
+        try {
+            const orders = await req.fetchAll(orderQuery.getForAdmin)
+
+            return res.json({
+                status: 200,
+                data: orders
+            })
+        } catch (err) {
+            return next(err)
+        }
     }
 } 

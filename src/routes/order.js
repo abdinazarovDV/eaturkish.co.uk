@@ -4,8 +4,8 @@ import  orderController from '#controller/order.js'
 const router = new Router()
 
 router.post("/", orderController.addOrder)
-router.post("/admin", orderController.adminViewed)
-// router.get("/",catController.GET)
+router.put("/admin", orderController.adminViewed)
+router.get("/admin",orderController.getOrderToAdmin)
 
 
 export default router

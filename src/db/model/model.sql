@@ -68,3 +68,9 @@ create table messages(
     user_id uuid references users(user_id) on delete cascade,
     message_body text not null
 );
+
+create table admins(
+    admin_id uuid not null default uuid_generate_v4() primary key,
+    admin_name varchar(32) not null,
+    admin_password varchar(64) not null
+);

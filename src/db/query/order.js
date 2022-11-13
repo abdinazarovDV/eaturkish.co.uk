@@ -13,5 +13,11 @@ export default {
             admin_view = true
         where orders_id::text = $1
         returning *
+    `,
+    getForAdmin: `
+        select
+            *
+        from orders
+        where admin_view = false
     `
 }

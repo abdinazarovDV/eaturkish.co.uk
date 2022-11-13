@@ -215,5 +215,27 @@ export default {
         } catch (err) {
             return next(err)
         }
+    },
+    adminLogin: async (req, res, next) => {
+        try {
+            const { name, password } = req.body
+            if(!name || !password) throw new Error("name and password is required")
+
+            const admin = await req.fetch(authQuery.adminLogin, name, password)
+            if(!admin) throw new Error("Admin not found with given name and password")
+
+            return res.json({
+                status: 200,
+                data: [{
+                    admin_name: admin.admin_name,
+                    token: jwt.sign({
+                        adminId: admin.admin_id,
+                        agent: req.headers["user-agent"]
+                    })
+                }]
+            })
+        } catch (err) {
+            return next(err)
+        }
     }
 }

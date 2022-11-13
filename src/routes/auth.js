@@ -27,5 +27,9 @@ router
     .route("/resetpasswordfinallystep")
     .post(authController.resetPasswordFinallyStep)
 
+router
+    .route("/admin/login")
+    .post(authController.adminLogin)
+
 
 export default router

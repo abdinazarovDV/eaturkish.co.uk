@@ -45,5 +45,11 @@ export default {
                 when length($2) > 0 then user_password = crypt($2, user_password)
                 else true
             end
+    `,
+    adminLogin: `
+        select
+            *   
+        from admins
+        where admin_name = $1 and admin_password = crypt($2, admin_password)    
     `
 }
