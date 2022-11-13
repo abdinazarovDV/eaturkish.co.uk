@@ -37,12 +37,12 @@ export default {
     findUser: `
         select
             *
-        from users
+        from users as u
         where
-            user_email_address = $1
+            u.user_email_address = $1
         and
             case
-                when length($2) > 0 then user_password = crypt($2, user_password)
+                when length($2) > 0 then u.user_password = crypt($2, user_password)
                 else true
             end
     `,
@@ -51,5 +51,22 @@ export default {
             *   
         from admins
         where admin_name = $1 and admin_password = crypt($2, admin_password)    
+    `,
+    findAdminById: `
+        select
+            *
+        from admins where admin_id::text = $1
+    `,
+    findUserById: `
+        select
+            *
+        from users where user_id::text = $1
+    `,
+    userLogin: `
+        select
+            *
+        from users
+        where user_email_address = $1
+        and user_password = crypt($2, user_password)
     `
 }

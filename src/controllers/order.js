@@ -7,8 +7,8 @@ import socketController from '#controller/socket.js'
 export default {
     addOrder: async (req, res, next) => {
         try {
-            const user_id =  req.user_id ||'9d68cfaf-d056-462e-af01-5cd52ecd6f4c'
-            
+            const user_id =  req.user_id
+            console.log(">>>", user_id)
             const user = await req.fetch(userQuery.findUser, user_id)
             if(!user) throw new Error('User not found')
             delete user.user_password
@@ -26,7 +26,7 @@ export default {
 
                 const food = await req.fetch(foodQuery.findFood, order.food_id)
                 if(!food) throw new Error('Invalid food id')
-
+       
                 const orderCreated = await req.fetch(orderQuery.addOrder, user_id, food.food_id, order.count, +order.count * +food.food_price)
                 if(!orderCreated) throw new Error('Order not added')
 

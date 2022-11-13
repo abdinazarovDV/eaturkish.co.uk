@@ -54,7 +54,7 @@ const io = new Server(server, {
 
 io.on('connection', (message) => {
     console.log(message)
-    // new socketController(message)
+    new socketController(message)
 })
 
 

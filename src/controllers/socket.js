@@ -7,7 +7,9 @@ export default class SocketIO {
     }
 
     newOrder (data) {
-        SocketIO.msg.emit('new order', { orders: data })
+        if(SocketIO.msg) {
+            SocketIO.msg.emit('new order', { orders: data })
+        }
     }
 }
 

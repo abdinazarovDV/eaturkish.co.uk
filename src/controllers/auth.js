@@ -97,7 +97,7 @@ export default {
 
             if(!emailAddress || !userPassword) throw new Error("Please enter data(email address and password)")
 
-            const isValid = await req.fetch(authQuery.findUser, emailAddress, userPassword)
+            const isValid = await req.fetch(authQuery.userLogin, emailAddress, userPassword)
             if(!isValid) throw new Error("Email address or password is wrong")
 
             return res.json({
